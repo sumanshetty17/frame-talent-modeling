@@ -34,55 +34,7 @@ function wireFileInput(inputId, outputId) {
 wireFileInput('photos', 'photoName');
 wireFileInput('video', 'videoName');
 
-// Registration form: submit via FormSubmit's AJAX endpoint so we can
-// show our own "details secured" message without leaving the page.
-const modelForm = document.getElementById('modelForm');
-if (modelForm) {
-  const submitBtn = document.getElementById('submitBtn');
-  const statusPanel = document.getElementById('statusPanel');
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    const originalLabel = submitBtn.textContent;
-    submitBtn.textContent = 'Submitting…';
-    submitBtn.disabled = true;
-
-    const formData = new FormData(modelForm);
-    // FormSubmit's AJAX endpoint mirrors the action email, but returns JSON
-    // instead of redirecting, so we can show a custom confirmation here.
-    const ajaxAction = modelForm.action.replace(
-      'formsubmit.co/',
-      'formsubmit.co/ajax/'
-    );
-
-    fetch(ajaxAction, {
-      method: 'POST',
-      body: formData,
-      headers: { Accept: 'application/json' }
-    })
-      .then(res => {
-        if (!res.ok) throw new Error('Submission failed');
-        return res.json();
-      })
-      .then(() => {
-        modelForm.style.display = 'none';
-        statusPanel.classList.add('show');
-        statusPanel.classList.remove('error');
-        statusPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      })
-      .catch(() => {
-        // Fall back to a normal form submission (also covers FormSubmit's
-        // one-time activation step on the very first submission to a new
-        // email address).
-        modelForm.removeEventListener('submit', handleSubmit);
-        modelForm.submit();
-      })
-      .finally(() => {
-        submitBtn.textContent = originalLabel;
-        submitBtn.disabled = false;
-      });
-  }
-
-  modelForm.addEventListener('submit', handleSubmit);
-}
+// The registration form now submits normally (no AJAX) so that photo and
+// video attachments are correctly delivered by FormSubmit. After a
+// successful submission, FormSubmit redirects to thankyou.html (set via
+// the form's hidden "_next" field).
