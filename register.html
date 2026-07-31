@@ -32,7 +32,24 @@
       <h2 style="font-size:clamp(30px,4vw,46px);text-transform:uppercase;margin-top:12px;max-width:20ch;">Register as a Model</h2>
       <p class="section-lede" style="margin-top:16px;max-width:52ch;">Fill in your details below. Everything you submit goes straight to our casting team — no public listing, no middlemen.</p>
 
-      <div class="form-shell" style="margin-top:50px;">
+      <div class="form-shell" style="margin-top:50px;" id="paymentGate">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+          <div>
+            <p class="eyebrow">Step 1 of 2</p>
+            <h3 style="font-size:24px;text-transform:uppercase;margin-top:10px;">Registration Fee</h3>
+            <p style="color:var(--paper-dim);margin-top:10px;max-width:44ch;">A one-time ₹299 fee to complete your application. Pay securely by UPI, netbanking, or card — then fill in your details.</p>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:var(--serif);font-size:40px;color:var(--gold);">₹299</div>
+            <button type="button" class="btn btn-solid" id="payBtn" style="margin-top:10px;">Pay &amp; Continue →</button>
+          </div>
+        </div>
+        <p class="form-note" id="payStatus" style="margin-top:20px;"></p>
+      </div>
+
+      <div class="form-shell" style="margin-top:24px;display:none;" id="registrationSection">
+        <p class="eyebrow">Step 2 of 2</p>
+        <h3 style="font-size:24px;text-transform:uppercase;margin-top:10px;margin-bottom:30px;">Your Details</h3>
 
         <form id="modelForm" action="https://formsubmit.co/devikabansola0910@gmail.com" method="POST" enctype="multipart/form-data">
 
@@ -41,6 +58,8 @@
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_next" value="https://sumanshetty17.github.io/frame-talent-modeling/thankyou.html">
+          <input type="hidden" name="Payment ID" id="paymentIdField" value="">
+          <input type="hidden" name="Payment Status" value="Paid — ₹299">
 
           <div class="form-grid">
             <div class="field">
@@ -147,6 +166,50 @@
   </div>
 </footer>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="script.js"></script>
+<script>
+  var payBtn = document.getElementById('payBtn');
+  var payStatus = document.getElementById('payStatus');
+  var paymentGate = document.getElementById('paymentGate');
+  var registrationSection = document.getElementById('registrationSection');
+  var paymentIdField = document.getElementById('paymentIdField');
+
+  payBtn.addEventListener('click', function () {
+    payBtn.disabled = true;
+    payBtn.textContent = 'Opening payment…';
+
+    var rzp = new Razorpay({
+      key: 'rzp_test_TK9v0wrvCeDPE4', // Razorpay Key ID (public, safe to expose)
+      amount: 29900, // ₹299 in paise
+      currency: 'INR',
+      name: 'Frame Talent Models',
+      description: 'Model Registration Fee',
+      theme: { color: '#c7a25c' },
+      handler: function (response) {
+        paymentIdField.value = response.razorpay_payment_id;
+        payStatus.textContent = 'Payment successful. Reference: ' + response.razorpay_payment_id;
+        paymentGate.style.opacity = '0.6';
+        payBtn.textContent = 'Paid ✓';
+        registrationSection.style.display = 'block';
+        registrationSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      },
+      modal: {
+        ondismiss: function () {
+          payBtn.disabled = false;
+          payBtn.textContent = 'Pay & Continue →';
+        }
+      }
+    });
+
+    rzp.on('payment.failed', function () {
+      payStatus.textContent = 'Payment failed or was cancelled — please try again.';
+      payBtn.disabled = false;
+      payBtn.textContent = 'Pay & Continue →';
+    });
+
+    rzp.open();
+  });
+</script>
 </body>
 </html>
