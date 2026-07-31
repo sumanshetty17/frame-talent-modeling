@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register — Frame Talent Models</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">Frame <span>Talent</span> Models</a>
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <a href="register.html" class="btn btn-solid">Register Now</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="section" style="padding-top:70px">
+    <div class="wrap">
+      <p class="eyebrow">Open Call</p>
+      <h2 style="font-size:clamp(30px,4vw,46px);text-transform:uppercase;margin-top:12px;max-width:20ch;">Register as a Model</h2>
+      <p class="section-lede" style="margin-top:16px;max-width:52ch;">Fill in your details below. Everything you submit goes straight to our casting team — no public listing, no middlemen.</p>
+
+      <div class="form-shell" style="margin-top:50px;">
+
+        <form id="modelForm" action="https://formsubmit.co/devikabansola0910@gmail.com" method="POST" enctype="multipart/form-data">
+
+          <!-- FormSubmit configuration -->
+          <input type="hidden" name="_subject" value="New Model Registration — Frame Talent Models">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="Full Name" required>
+            </div>
+
+            <div class="field">
+              <label for="gender">Gender</label>
+              <div class="select-wrap">
+                <select id="gender" name="Gender" required>
+                  <option value="" disabled selected>Select</option>
+                  <option>Female</option>
+                  <option>Male</option>
+                  <option>Non-binary</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" name="Date of Birth" required>
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="Phone Number" placeholder="+91 00000 00000" required>
+            </div>
+
+            <div class="field">
+              <label for="state">State</label>
+              <input type="text" id="state" name="State" required>
+            </div>
+
+            <div class="field">
+              <label for="city">City</label>
+              <input type="text" id="city" name="City" required>
+            </div>
+
+            <div class="field">
+              <label for="insta">Instagram URL</label>
+              <input type="url" id="insta" name="Instagram URL" placeholder="https://instagram.com/yourname" required>
+            </div>
+
+            <div class="field">
+              <label for="gmail">Gmail Address</label>
+              <input type="email" id="gmail" name="Gmail Address" placeholder="you@gmail.com" required>
+            </div>
+
+            <div class="field full">
+              <label>Model Photos</label>
+              <div class="file-field">
+                <div class="file-meta">
+                  <span class="name">Upload 2–5 clear photos (face + full length)</span>
+                  <span class="file-name-out" id="photoName">No file chosen</span>
+                </div>
+                <span class="btn file-btn">Choose File
+                  <input type="file" id="photos" name="Model Photos" accept="image/*" multiple required>
+                </span>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label>Introduction Video</label>
+              <div class="file-field">
+                <div class="file-meta">
+                  <span class="name">A short 15–30 second video of yourself</span>
+                  <span class="file-name-out" id="videoName">No file chosen</span>
+                </div>
+                <span class="btn file-btn">Choose File
+                  <input type="file" id="video" name="Introduction Video" accept="video/*" required>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" class="btn btn-solid" id="submitBtn">Submit Application →</button>
+            <p class="form-note">By submitting, you agree to be contacted by Frame Talent Models regarding your application.</p>
+          </div>
+        </form>
+
+        <div class="status-panel" id="statusPanel">
+          <p class="eyebrow">Application Received</p>
+          <h3>Your details have been secured.</h3>
+          <p>They've been shared with our casting team — we'll check everything out and reach out to you soon. Thanks for applying to Frame Talent Models.</p>
+          <a href="index.html" class="btn">Back to Home</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <a href="index.html" class="logo">Frame <span>Talent</span> Models</a>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="register.html">Register</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Frame Talent Models. All rights reserved.</span>
+      <span>devikabansola0910@gmail.com</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
